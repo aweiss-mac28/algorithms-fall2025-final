@@ -5,22 +5,22 @@ import java.util.Scanner;
 
 public class KnuthAlgorithm {
     private static Scanner scan;
-    private static ArrayList<Guess> guessList;
+    private static ArrayList<Guess> guessList ;
     private static Answer answer;
     private static boolean gameWon;
 
     private static ArrayList <Integer> possibleCodes;
     private static ArrayList <Integer> allCodes;
 
-    public static void knuthAlgorithm() {
+    public KnuthAlgorithm() {
         
         answer = new Answer();
         gameWon = false;
 
         possibleCodes = generateCodes();
         allCodes = possibleCodes;
-        guessList = new ArrayList<>();
 
+        guessList = new ArrayList<>();
 
     }
 
