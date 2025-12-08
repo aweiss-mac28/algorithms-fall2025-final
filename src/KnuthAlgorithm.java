@@ -88,7 +88,9 @@ public class KnuthAlgorithm {
     public static Marks processUserInput(String userInput) {
         ArrayList<String> userGuess = new ArrayList<>();
         for(int i = 0; i<= 3; i++){
-            userGuess.add(userInput.substring(i, i+1));
+            int inputNum = Integer.parseInt(userInput.substring(i,i+1));
+            String colorGuess = ColorFormat.numberToColor(inputNum);
+            userGuess.add(colorGuess);
         }
         CodePin guessPin1 = new CodePin(userGuess.get(0));
         CodePin guessPin2 = new CodePin(userGuess.get(1));

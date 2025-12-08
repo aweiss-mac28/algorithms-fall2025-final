@@ -7,4 +7,8 @@ public class ColorFormat {
         colorFormatString = colorFormatString.replaceFirst(firstLetter, firstLetter.toUpperCase());
         return colorFormatString;
     }
+
+    public static String numberToColor(int num) {
+        return CodePin.colorList.get(num);
+    }
 }

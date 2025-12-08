@@ -8,7 +8,7 @@ import edu.macalester.graphics.Ellipse;
 
 public class CodePin implements Pin {
     public static final double PIN_SIZE = 20;
-    private static final List<String> colorList = List.of("1", "2", "3", "4", "5", "6");
+    public static final List<String> colorList = List.of("Red", "Orange", "Yellow", "Green", "Blue", "Purple");
 
     private Scanner scan;
     private String pinColor;
