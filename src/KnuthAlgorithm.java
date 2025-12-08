@@ -13,17 +13,19 @@ public class KnuthAlgorithm {
     private static ArrayList <Integer> allCodes;
 
     public static void knuthAlgorithm() {
+        
         answer = new Answer();
         gameWon = false;
 
         possibleCodes = generateCodes();
         allCodes = possibleCodes;
-
+        guessList = new ArrayList<>();
 
 
     }
 
     public void runGame(){
+       
         processTurn("1122");
 
         while(!gameWon){
@@ -85,7 +87,7 @@ public class KnuthAlgorithm {
 
     public static Marks processUserInput(String userInput) {
         ArrayList<String> userGuess = new ArrayList<>();
-        for(int i = 0; i< 3; i++){
+        for(int i = 0; i<= 3; i++){
             userGuess.add(userInput.substring(i, i+1));
         }
         CodePin guessPin1 = new CodePin(userGuess.get(0));
@@ -98,7 +100,7 @@ public class KnuthAlgorithm {
     }
 
     public static ArrayList<Integer> generateCodes(){
-        ArrayList <Integer> possibleCodes = new ArrayList();
+        ArrayList <Integer> possibleCodes = new ArrayList<Integer>();
         for(int i = 1; i < 7; i ++){
             for(int j = 1;  j < 7; j ++){
                 for(int k = 1;  k < 7; k ++){
