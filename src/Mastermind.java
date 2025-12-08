@@ -40,7 +40,7 @@ public class Mastermind {
         while (guessList.size() < MAX_GUESSES && !gameWon()) {
             System.out.println("Make a guess (or enter another command): ");
             String userInput = scan.nextLine();
-            Marks marks = KnuthAlgorithm.processUserInput(userInput);
+            Marks marks = Mastermind.processUserInput(userInput);
             marksList.add(marks);
             System.out.println(marks.getMarks());
             if (visualizer != null) {
