@@ -38,7 +38,7 @@ public class Mastermind {
     public void play() {
         System.out.println("~~~~~ NEW GAME STARTED ~~~~~");
         while (guessList.size() < MAX_GUESSES && !gameWon()) {
-            System.out.println("Make a guess (or enter another command): ");
+            System.out.println("Make a guess (or enter another command such as 'help'): ");
             String userInput = scan.nextLine();
             Marks marks = Mastermind.processUserInput(userInput);
             marksList.add(marks);
