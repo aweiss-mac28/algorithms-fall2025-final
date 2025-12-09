@@ -21,6 +21,9 @@ public class Marks {
             if (pin.getColor().equals(answerSequence.get(i).getColor())) {
                 numBlack ++;
                 markPinList.add(new MarkPin("black"));
+                if(incorrect.get(i) == null){
+                    numWhite --;
+                }
                 incorrect.set(i, null);
             }
             else {
