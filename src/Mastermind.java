@@ -6,6 +6,11 @@ import java.util.Scanner;
 
 import edu.macalester.graphics.CanvasWindow;
 
+/*problems:
+    white marks don't show
+    all pins in wrong places
+ */
+
 public class Mastermind {
     private final static int WINDOW_WIDTH = 300;
     private final static int WINDOW_HEIGHT = 600;
@@ -64,7 +69,7 @@ public class Mastermind {
         if (scan.nextLine().equalsIgnoreCase("Y")) {
             reset();
         }
-        scan.close();
+        //scan.close(); //elyse changed
     }
 
     public static Marks processUserInput(String userInput) {
@@ -118,6 +123,10 @@ public class Mastermind {
     }
 
     public static void visualize() {
+        if (canvas != null) { //elyse changed/added
+            canvas.closeWindow();
+        }
+
         canvas = new CanvasWindow("Mastermind Game", WINDOW_WIDTH, WINDOW_HEIGHT);
         canvas.setBackground(Color.BLACK);
 

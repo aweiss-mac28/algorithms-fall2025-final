@@ -6,6 +6,8 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Rectangle;
 
 public class Visualizer extends GraphicsGroup {
+    private GraphicsGroup guessPins = new GraphicsGroup();
+    private GraphicsGroup marksPins = new GraphicsGroup();
     private int width;
     private int height;
 
@@ -15,6 +17,8 @@ public class Visualizer extends GraphicsGroup {
         GameBoard gameBoard = new GameBoard();
         gameBoard.setCenter(width / 2, height / 2);
         this.add(gameBoard);
+        this.add(guessPins);
+        this.add(marksPins);
     }
 
 
@@ -24,8 +28,11 @@ public class Visualizer extends GraphicsGroup {
     }
 
     private void showGuesses(ArrayList<Guess> guesses) {
-        GraphicsGroup guessPins = new GraphicsGroup();
-        this.add(guessPins);
+        guessPins.removeAll();
+
+        //GraphicsGroup guessPins = new GraphicsGroup();
+        //this.add(guessPins);
+
         int i = 0;
         for (Guess guess : guesses) {
             double xPos = 0;
@@ -34,22 +41,25 @@ public class Visualizer extends GraphicsGroup {
             guessPins.add(guessGraphics, xPos, yPos);
             i++;
         }
-        for (int n = 0; n > (Mastermind.MAX_GUESSES - i); n++) {
-            double xPos = CodePin.PIN_SIZE * 1.5;
-            double yPos = (n + i) * CodePin.PIN_SIZE * 2;
-            Rectangle filler = 
-                new Rectangle(0, 0, CodePin.PIN_SIZE * 6, CodePin.PIN_SIZE);
-            filler.setFilled(false);
-            // filler.setStroked(false);
-            filler.setStrokeColor(Color.white);
-            guessPins.add(filler, xPos, yPos);
-        }
+        // for (int n = 0; n < (Mastermind.MAX_GUESSES - i); n++) { //changed n > (Mastermind.MAX_GUESSES - i) to changed n < (Mastermind.MAX_GUESSES - i) elyse
+        //     double xPos = CodePin.PIN_SIZE * 1.5;
+        //     double yPos = (n + i) * CodePin.PIN_SIZE * 2;
+        //     Rectangle filler = 
+        //         new Rectangle(0, 0, CodePin.PIN_SIZE * 6, CodePin.PIN_SIZE);
+        //     filler.setFilled(false);
+        //     // filler.setStroked(false);
+        //     filler.setStrokeColor(Color.white);
+        //     guessPins.add(filler, xPos, yPos);
+        // }
         guessPins.setCenter((width / 2) - (CodePin.PIN_SIZE * 2), height / 2);
     }
 
     private void showMarks(ArrayList<Marks> marks) {
-        GraphicsGroup marksPins = new GraphicsGroup();
-        this.add(marksPins);
+         marksPins.removeAll();
+
+        //GraphicsGroup marksPins = new GraphicsGroup(); 
+        //this.add(marksPins);
+
         int i = 0;
         for (Marks mark : marks) {
             double xPos = 0;
