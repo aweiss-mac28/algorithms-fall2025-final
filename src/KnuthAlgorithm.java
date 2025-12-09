@@ -47,6 +47,7 @@ public class KnuthAlgorithm {
         else{
             for(int code : possibleCodes){
                 //remove any impossible code
+                //create list of possible codes, replace possiblecodes with this new version
             }
         }
     }
