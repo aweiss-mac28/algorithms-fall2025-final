@@ -45,6 +45,8 @@ public class KnuthAlgorithm {
             System.out.println("Game won with " + guessList.size() + "guesses!");
         }
         else{
+            allCodes.remove(guess);
+            possibleCodes.remove(guess);
             for(String code : possibleCodes){
                 checkIfPossible(marks.getMarks(), code);
             }
