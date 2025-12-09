@@ -20,7 +20,7 @@ public class Marks {
         for (CodePin pin : guessSequence) {
             if (pin.getColor().equals(answerSequence.get(i).getColor())) {
                 numBlack ++;
-                markPinList.add(new MarkPin("black"));
+                //markPinList.add(new MarkPin("black"));
                 if(incorrect.get(i) == null){
                     numWhite --;
                 }
@@ -31,6 +31,7 @@ public class Marks {
                     CodePin otherPin = incorrect.get(j);
                     if (otherPin != null && pin.getColor().equals(otherPin.getColor())) {
                         numWhite++;
+                        //markPinList.add(new MarkPin("white"));
                         incorrect.set(j, null);
                         break;
                     }
@@ -38,6 +39,14 @@ public class Marks {
             }
             i++;
         }
+        for (int k = 0; k < numBlack; k++) {
+            markPinList.add(new MarkPin("black"));
+        }
+
+        for (int l = 0; l < numWhite; l++) {
+            markPinList.add(new MarkPin("white"));
+        } 
+        //last 2 for loops control order for marks, black before white
 
         markPins = new GraphicsGroup();
         double xPos = 0;
