@@ -21,17 +21,18 @@ public class Marks {
             if (pin.getColor().equals(answerSequence.get(i).getColor())) {
                 numBlack ++;
                 markPinList.add(new MarkPin("black"));
+                if(incorrect.get(i) == null){
+                    numWhite --;
+                }
                 incorrect.set(i, null);
             }
             else {
-                for (CodePin otherPin : incorrect) {
-                    if (otherPin != null) {
-                        if (pin.getColor().equals(otherPin.getColor())) {
-                            numWhite ++;
-                            markPinList.add(new MarkPin("white"));
-                            otherPin = null;
-                            break;
-                        }
+                for (int j = 0; j < incorrect.size(); j++) {
+                    CodePin otherPin = incorrect.get(j);
+                    if (otherPin != null && pin.getColor().equals(otherPin.getColor())) {
+                        numWhite++;
+                        incorrect.set(j, null);
+                        break;
                     }
                 }
             }

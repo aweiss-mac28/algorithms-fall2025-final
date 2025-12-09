@@ -9,12 +9,13 @@ public class KnuthAlgorithm {
     private static Answer answer;
     private static boolean gameWon;
 
-    private static ArrayList <Integer> possibleCodes;
-    private static ArrayList <Integer> allCodes;
+    private static ArrayList <String> possibleCodes;
+    private static ArrayList <String> allCodes;
 
     public KnuthAlgorithm() {
         
         answer = new Answer();
+        System.out.println("secret: " + answer.getSequenceAsString() );
         gameWon = false;
 
         possibleCodes = generateCodes();
@@ -29,12 +30,13 @@ public class KnuthAlgorithm {
         processTurn("1122");
 
         while(!gameWon){
-            int nextGuess = chooseNextGuess();
+            String nextGuess = chooseNextGuess();
             processTurn("" + nextGuess);
         }
     }
 
     public static void processTurn(String guess){
+        System.out.println("guess: " + guess);
         Marks marks = processUserInput(guess);
         System.out.println(marks.getMarks());
         String markResult = formatMarks(marks.getMarks());
@@ -43,17 +45,17 @@ public class KnuthAlgorithm {
             System.out.println("Game won with " + guessList.size() + "guesses!");
         }
         else{
-            for(int code : possibleCodes){
-                //remove any impossible code
+            for(String code : possibleCodes){
+                checkIfPossible(marks.getMarks(), code);
             }
         }
     }
 
-    public static int chooseNextGuess() {
+    public static String chooseNextGuess() {
         int bestScore = Integer.MAX_VALUE;
-        ArrayList<Integer> bestCandidates = new ArrayList<>();
+        ArrayList<String> bestCandidates = new ArrayList<>();
 
-        for (int guess : allCodes) {
+        for (String guess : allCodes) {
             int maxGroup = scoreGuess(guess, possibleCodes);  
 
             if (maxGroup < bestScore) {
@@ -65,7 +67,7 @@ public class KnuthAlgorithm {
             }
         }
 
-        for (int g : bestCandidates) {
+        for (String g : bestCandidates) {
             if (possibleCodes.contains(g)) {
                 return g;
             }
@@ -75,13 +77,18 @@ public class KnuthAlgorithm {
 
     //if guesslist.get(guesslist.size()-1) produced a certain mark, decides whether a hypothetical 
     // future guess could have been the secret code to produce those marks.
-    public boolean checkIfPossible(String marks, int possibleGuess){
-        return true;
+    public static boolean checkIfPossible(String marks, String possibleGuess){
+        Marks possibleGuessMarks = processHypotheticalInput(possibleGuess);
+        String possibleResult = possibleGuessMarks.getMarks();
+        if(marks.equals(possibleResult)){
+           return true;
+        }
+        return false;
     }
 
     public static String formatMarks(String phrase){
         String numwhite = phrase.substring(33, 34);
-        String numblack = phrase.substring(14,15);
+        String numblack = phrase.substring(15,16);
         return numwhite + "" + numblack;
     }
 
@@ -101,13 +108,28 @@ public class KnuthAlgorithm {
         return new Marks(guess, answer);
     }
 
-    public static ArrayList<Integer> generateCodes(){
-        ArrayList <Integer> possibleCodes = new ArrayList<Integer>();
+     public static Marks processHypotheticalInput(String userInput) {
+        ArrayList<String> userGuess = new ArrayList<>();
+        for(int i = 0; i<= 3; i++){
+            int inputNum = Integer.parseInt(userInput.substring(i,i+1));
+            String colorGuess = ColorFormat.numberToColor(inputNum);
+            userGuess.add(colorGuess);
+        }
+        CodePin guessPin1 = new CodePin(userGuess.get(0));
+        CodePin guessPin2 = new CodePin(userGuess.get(1));
+        CodePin guessPin3 = new CodePin(userGuess.get(2));
+        CodePin guessPin4 = new CodePin(userGuess.get(3));
+        Guess guess = new Guess(guessPin1, guessPin2, guessPin3, guessPin4);
+        return new Marks(guess, answer);
+    }
+
+    public static ArrayList<String> generateCodes(){
+        ArrayList <String> possibleCodes = new ArrayList<String>();
         for(int i = 1; i < 7; i ++){
             for(int j = 1;  j < 7; j ++){
                 for(int k = 1;  k < 7; k ++){
                     for(int l = 1;  l < 7; l ++){
-                        possibleCodes.add(Integer.parseInt(""+ i + j + k + l));
+                        possibleCodes.add(""+ i + j + k + l);
                     } 
                 } 
             } 
@@ -125,11 +147,11 @@ public class KnuthAlgorithm {
         );
     }
 
-    public static int scoreGuess(int guess, ArrayList<Integer> possible) {
+    public static int scoreGuess(String guess, ArrayList<String> possible) {
     // Map: markPattern → count
     HashMap<String, Integer> partition = new HashMap<>();
 
-        for (int secret : possible) {
+        for (String secret : possible) {
             Marks m = processUserInput(""+guess);
             String key = formatMarks(m.getMarks());          
             partition.put(key, partition.getOrDefault(key, 0) + 1);
