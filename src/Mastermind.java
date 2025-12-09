@@ -7,7 +7,7 @@ import java.util.Scanner;
 import edu.macalester.graphics.CanvasWindow;
 
 public class Mastermind {
-    private final static int WINDOW_WIDTH = 400;
+    private final static int WINDOW_WIDTH = 300;
     private final static int WINDOW_HEIGHT = 600;
     public final static int MAX_GUESSES = 10;
     private static Scanner scan;
@@ -22,7 +22,8 @@ public class Mastermind {
     private static Visualizer visualizer;
     
     public static void main(String[] args) {
-        new Mastermind().play();
+        //new Mastermind().play(); //change back elyse
+        new Mastermind(); //changed
     }
 
     public Mastermind() {
@@ -33,6 +34,8 @@ public class Mastermind {
         guessList = new ArrayList<>();
         marksList = new ArrayList<>();
         scan = new Scanner(System.in);
+        visualize(); //change back elyse
+        play(); //change back elyse
     }
 
     public void play() {

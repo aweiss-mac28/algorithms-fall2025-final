@@ -22,6 +22,7 @@ public class GameBoard extends GraphicsGroup {
         Rectangle board = new Rectangle(0, 0, boardWidth, boardHeight);
         board.setFillColor(Color.LIGHT_GRAY);
         this.add(board);
+        
     }
 
     private void createGuessPinHoles() {
