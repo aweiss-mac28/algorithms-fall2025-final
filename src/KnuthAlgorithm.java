@@ -15,6 +15,7 @@ public class KnuthAlgorithm {
     public KnuthAlgorithm() {
         
         answer = new Answer();
+        System.out.println("secret: " + answer.getSequenceAsString() );
         gameWon = false;
 
         possibleCodes = generateCodes();
@@ -35,6 +36,7 @@ public class KnuthAlgorithm {
     }
 
     public static void processTurn(String guess){
+        System.out.println("guess: " + guess);
         Marks marks = processUserInput(guess);
         System.out.println(marks.getMarks());
         String markResult = formatMarks(marks.getMarks());
@@ -81,7 +83,7 @@ public class KnuthAlgorithm {
 
     public static String formatMarks(String phrase){
         String numwhite = phrase.substring(33, 34);
-        String numblack = phrase.substring(14,15);
+        String numblack = phrase.substring(15,16);
         return numwhite + "" + numblack;
     }
 

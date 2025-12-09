@@ -30,6 +30,7 @@ public class Mastermind {
         totalLosses = 0;
         guessesMade = 0;
         answer = new Answer();
+        System.out.println(answer.getSequenceAsString());
         guessList = new ArrayList<>();
         marksList = new ArrayList<>();
         scan = new Scanner(System.in);

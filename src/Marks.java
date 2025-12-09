@@ -24,14 +24,12 @@ public class Marks {
                 incorrect.set(i, null);
             }
             else {
-                for (CodePin otherPin : incorrect) {
-                    if (otherPin != null) {
-                        if (pin.getColor().equals(otherPin.getColor())) {
-                            numWhite ++;
-                            markPinList.add(new MarkPin("white"));
-                            otherPin = null;
-                            break;
-                        }
+                for (int j = 0; j < incorrect.size(); j++) {
+                    CodePin otherPin = incorrect.get(j);
+                    if (otherPin != null && pin.getColor().equals(otherPin.getColor())) {
+                        numWhite++;
+                        incorrect.set(j, null);
+                        break;
                     }
                 }
             }
