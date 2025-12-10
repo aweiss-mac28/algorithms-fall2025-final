@@ -33,6 +33,7 @@ public class Mastermind {
     
     public static void main(String[] args) {
         new Mastermind();
+        scan = new Scanner(System.in);
     }
 
     public Mastermind() {
@@ -44,7 +45,6 @@ public class Mastermind {
         answer = new Answer();
         guessList = new ArrayList<>();
         marksList = new ArrayList<>();
-        scan = new Scanner(System.in);
         visualize();
     }
 
