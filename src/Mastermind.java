@@ -139,9 +139,7 @@ public class Mastermind {
         } else {
             strButtonGuess += " " + color;
         }
-        System.out.println("Button guess: " + strButtonGuess + " , buttonCount: " + buttonCount);
         if (buttonCount == 4) {
-            System.out.println("Button guess: " + strButtonGuess + " , buttonCount: " + buttonCount);
             Marks marks = processUserInput(strButtonGuess);
             marksList.add(marks);
             guessList.size();
