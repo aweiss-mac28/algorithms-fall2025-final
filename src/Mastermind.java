@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.ui.Button;
 
 public class Mastermind {
     private final static int WINDOW_WIDTH = 300;
@@ -20,6 +21,15 @@ public class Mastermind {
     private static ArrayList<Guess> guessList;
     private static ArrayList<Marks> marksList;
     private static Visualizer visualizer;
+
+    private static Button redButton;
+    private static Button orangeButton;
+    private static Button yellowButton;
+    private static Button greenButton;
+    private static Button blueButton;
+    private static Button purpleButton;
+    private static int buttonCount;
+    private static String strButtonGuess;
     
     public static void main(String[] args) {
         new Mastermind();
@@ -29,13 +39,15 @@ public class Mastermind {
         totalWins = 0;
         totalLosses = 0;
         guessesMade = 0;
+        buttonCount = 0;
+        strButtonGuess = "";
         answer = new Answer();
         System.out.println(answer.getSequenceAsString());
         guessList = new ArrayList<>();
         marksList = new ArrayList<>();
         scan = new Scanner(System.in);
-        visualize(); //change back later maybe
-        play(); //change back later maybe
+        visualize();
+        play();
     }
 
     public void play() {
@@ -65,6 +77,59 @@ public class Mastermind {
         } else {
             canvas.closeWindow();
         }
+    }
+
+    public static void setUpButtons() {
+        redButton = new Button("Red");
+        orangeButton = new Button("Orange");
+        yellowButton = new Button("Yellow");
+        greenButton = new Button("Green");
+        blueButton = new Button("Blue");
+        purpleButton = new Button("Purple");
+
+        redButton.setPosition(10, 10);
+        orangeButton.setPosition(110, 10);
+        yellowButton.setPosition(210, 10);
+        greenButton.setPosition(10, 40);
+        blueButton.setPosition(110, 40);
+        purpleButton.setPosition(210, 40);
+
+        canvas.add(redButton);
+        canvas.add(orangeButton);
+        canvas.add(yellowButton);
+        canvas.add(greenButton);
+        canvas.add(blueButton);
+        canvas.add(purpleButton);
+
+        redButton.onClick(() -> handleButtonPress("red"));
+        orangeButton.onClick(() -> handleButtonPress("orange"));
+        yellowButton.onClick(() -> handleButtonPress("yellow"));
+        greenButton.onClick(() -> handleButtonPress("green"));
+        blueButton.onClick(() -> handleButtonPress("blue"));
+        purpleButton.onClick(() -> handleButtonPress("purple"));
+        
+    }
+
+    public static void handleButtonPress(String color) {
+        buttonCount++;
+        if(strButtonGuess.equals("")) {
+            strButtonGuess += color;
+        } else {
+            strButtonGuess += " " + color;
+        }
+        System.out.println("Button guess: " + strButtonGuess + " , buttonCount: " + buttonCount);
+        if(buttonCount == 4) {
+            //processUserInput(strButtonGuess);
+            System.out.println("Button guess: " + strButtonGuess + " , buttonCount: " + buttonCount);
+            Marks marks = processUserInput(strButtonGuess);
+            marksList.add(marks);
+            guessList.size();
+            visualizer.update(guessList, marksList);
+            canvas.draw();
+            buttonCount = 0;
+            strButtonGuess = "";
+        }
+        
     }
 
     public static Marks processUserInput(String userInput) {
@@ -128,6 +193,9 @@ public class Mastermind {
         visualizer = new Visualizer(WINDOW_WIDTH, WINDOW_HEIGHT);
         visualizer.update(guessList, marksList);
         canvas.add(visualizer);
+
+        setUpButtons();
+
         canvas.draw();
     }
 
