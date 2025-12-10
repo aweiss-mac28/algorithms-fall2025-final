@@ -1,9 +1,6 @@
-
-import java.awt.Color;
 import java.util.ArrayList;
 
 import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.Rectangle;
 
 public class Visualizer extends GraphicsGroup {
     private GraphicsGroup guessPins = new GraphicsGroup();
