@@ -75,7 +75,7 @@ public class Mastermind {
         System.out.println("Play again? (Y/N)");
         if (scan.nextLine().equalsIgnoreCase("Y")) {
             reset();
-        } else {
+        } else if (canvas != null) {
             canvas.closeWindow();
         }
     }
@@ -154,6 +154,7 @@ public class Mastermind {
         } else {
             createGuess(strButtonGuess);
             visualizer.update(guessList, marksList);
+            canvas.draw();
         }
     }
 
