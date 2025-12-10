@@ -131,18 +131,17 @@ public class Mastermind {
         greenButton.onClick(() -> handleButtonPress("green"));
         blueButton.onClick(() -> handleButtonPress("blue"));
         purpleButton.onClick(() -> handleButtonPress("purple"));
-        
     }
 
     public static void handleButtonPress(String color) {
         buttonCount++;
-        if(strButtonGuess.equals("")) {
+        if (strButtonGuess.equals("")) {
             strButtonGuess += color;
         } else {
             strButtonGuess += " " + color;
         }
         System.out.println("Button guess: " + strButtonGuess + " , buttonCount: " + buttonCount);
-        if(buttonCount == 4) {
+        if (buttonCount == 4) {
             System.out.println("Button guess: " + strButtonGuess + " , buttonCount: " + buttonCount);
             Marks marks = processUserInput(strButtonGuess);
             marksList.add(marks);
@@ -153,7 +152,6 @@ public class Mastermind {
             strButtonGuess = "";
             winCheck();
         }
-        
     }
 
     public static Marks processUserInput(String userInput) {

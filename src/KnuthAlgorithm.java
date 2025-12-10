@@ -7,7 +7,11 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 
 public class KnuthAlgorithm {
-    private static ArrayList<Guess> guessList ;
+    private final static int WINDOW_WIDTH = 300;
+    private final static int WINDOW_HEIGHT = 600;
+    private static CanvasWindow canvas;
+
+    private static ArrayList<Guess> guessList;
     private static ArrayList<Marks> marksList;
     private static Visualizer visualizer;
     private static Answer answer;
@@ -15,12 +19,8 @@ public class KnuthAlgorithm {
     private static ArrayList <String> possibleCodes;
     private static ArrayList <String> allCodes;
     private static GraphicsGroup answerGraphic;
-    private final static int WINDOW_WIDTH = 300;
-    private final static int WINDOW_HEIGHT = 600;
-    private static CanvasWindow canvas;
 
     public KnuthAlgorithm() {
-        
         answer = new Answer();
         answerGraphic = answer.getSequenceGraphics();
         System.out.println("secret: " + answer.getSequenceAsString() );
@@ -30,15 +30,12 @@ public class KnuthAlgorithm {
         allCodes = new ArrayList<>(possibleCodes);
         guessList = new ArrayList<>();
         marksList = new ArrayList<>();
-
-
     }
 
     public void runGame(){
-       
         processTurn("1122");
         visualize();
-        while(!gameWon){
+        while (!gameWon) {
             String nextGuess = chooseNextGuess();
             processTurn("" + nextGuess);
               if (visualizer != null) {
@@ -55,16 +52,18 @@ public class KnuthAlgorithm {
 
         canvas = new CanvasWindow("Mastermind Game", WINDOW_WIDTH, WINDOW_HEIGHT);
         canvas.setBackground(Color.BLACK);
-        answerGraphic.setCenter(WINDOW_WIDTH/2-15, 60);
+
+        answerGraphic.setCenter(WINDOW_WIDTH / 2 - 15, 60);
         canvas.add(answerGraphic);
+
         GraphicsText answerText = new GraphicsText("SECRET ANSWER");
         answerText.setFillColor(Color.white);
-        answerText.setCenter(WINDOW_WIDTH/2-15, 40);
+        answerText.setCenter(WINDOW_WIDTH / 2 - 15, 40);
         canvas.add(answerText);
+
         visualizer = new Visualizer(WINDOW_WIDTH, WINDOW_HEIGHT);
         visualizer.update(guessList, marksList);
         canvas.add(visualizer);
-
 
         canvas.draw();
     }
@@ -76,11 +75,10 @@ public class KnuthAlgorithm {
         marksList.add(marks);
         String markResult = formatMarks(marks.getMarks());
         int numblack = Integer.parseInt(markResult.substring(1));
-        if(numblack == 4){
+        if (numblack == 4){
             System.out.println("Game won with " + guessList.size() + " guesses!");
             gameWon = true;
-        }
-        else{
+        } else {
             allCodes.remove(guess);
             possibleCodes.remove(guess);
             ArrayList<String> newList = new ArrayList<>();
@@ -119,16 +117,16 @@ public class KnuthAlgorithm {
 
     //if guesslist.get(guesslist.size()-1) produced a certain mark, decides whether a hypothetical 
     // future guess could have been the secret code to produce those marks.
-    public static boolean checkIfPossible(String marks, String prevGuess, String possibleGuess){
+    public static boolean checkIfPossible(String marks, String prevGuess, String possibleGuess) {
         Marks possibleGuessMarks = processHypotheticalInput(prevGuess, possibleGuess);
         String possibleResult = possibleGuessMarks.getMarks();
-        if(marks.equals(possibleResult)){
+        if (marks.equals(possibleResult)) {
            return true;
         }
         return false;
     }
 
-    public static String formatMarks(String phrase){
+    public static String formatMarks(String phrase) {
         String numwhite = phrase.substring(33, 34);
         String numblack = phrase.substring(15,16);
         return numwhite + "" + numblack;
@@ -136,7 +134,7 @@ public class KnuthAlgorithm {
 
     public static Marks processUserInput(String userInput) {
         ArrayList<String> userGuess = new ArrayList<>();
-        for(int i = 0; i<= 3; i++){
+        for (int i = 0; i<= 3; i++) {
             int inputNum = Integer.parseInt(userInput.substring(i,i+1));
             String colorGuess = ColorFormat.numberToColor(inputNum);
             userGuess.add(colorGuess);
@@ -153,8 +151,8 @@ public class KnuthAlgorithm {
      public static Marks processHypotheticalInput(String userInput, String hypotheticalAnswer) {
         Answer hypotheticalAns = new Answer(hypotheticalAnswer);
         ArrayList<String> userGuess = new ArrayList<>();
-        for(int i = 0; i<= 3; i++){
-            int inputNum = Integer.parseInt(userInput.substring(i,i+1));
+        for (int i = 0; i<= 3; i++) {
+            int inputNum = Integer.parseInt(userInput.substring(i, i+1));
             String colorGuess = ColorFormat.numberToColor(inputNum);
             userGuess.add(colorGuess);
         }
@@ -166,12 +164,12 @@ public class KnuthAlgorithm {
         return new Marks(guess, hypotheticalAns);
     }
 
-    public static ArrayList<String> generateCodes(){
+    public static ArrayList<String> generateCodes() {
         ArrayList <String> possibleCodes = new ArrayList<String>();
-        for(int i = 1; i < 7; i ++){
-            for(int j = 1;  j < 7; j ++){
-                for(int k = 1;  k < 7; k ++){
-                    for(int l = 1;  l < 7; l ++){
+        for (int i = 1; i < 7; i ++) {
+            for (int j = 1;  j < 7; j ++) {
+                for (int k = 1;  k < 7; k ++) {
+                    for (int l = 1;  l < 7; l ++) {
                         possibleCodes.add(""+ i + j + k + l);
                     } 
                 } 
@@ -181,17 +179,17 @@ public class KnuthAlgorithm {
     }
 
     public static Guess toGuess(int code) {
-    String s = String.format("%04d", code); // ensures 4 digits
-    return new Guess(
-        new CodePin("" + s.charAt(0)),
-        new CodePin("" + s.charAt(1)),
-        new CodePin("" + s.charAt(2)),
-        new CodePin("" + s.charAt(3))
+        String s = String.format("%04d", code); // ensures 4 digits
+        return new Guess(
+            new CodePin("" + s.charAt(0)),
+            new CodePin("" + s.charAt(1)),
+            new CodePin("" + s.charAt(2)),
+            new CodePin("" + s.charAt(3))
         );
     }
 
     public static int scoreGuess(String guess, ArrayList<String> possible) {
-    HashMap<String, Integer> partition = new HashMap<>();
+        HashMap<String, Integer> partition = new HashMap<>();
 
         for (String possibleCode : possible) {
             Marks m = processHypotheticalInput(guess, possibleCode);
@@ -205,7 +203,6 @@ public class KnuthAlgorithm {
                 maxGroup = size;
             }
         }
-
         
         return maxGroup;
     }

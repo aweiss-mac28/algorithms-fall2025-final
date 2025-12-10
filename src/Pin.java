@@ -1,4 +1,3 @@
-
 import edu.macalester.graphics.Ellipse;
 
 public interface Pin {

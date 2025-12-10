@@ -9,6 +9,6 @@ public class ColorFormat {
     }
 
     public static String numberToColor(int num) {
-        return CodePin.colorList.get(num-1); 
+        return CodePin.colorList.get(num - 1); 
     }
 }

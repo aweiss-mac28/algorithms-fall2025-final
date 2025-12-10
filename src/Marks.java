@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 import edu.macalester.graphics.GraphicsGroup;
@@ -53,8 +52,8 @@ public class Marks {
         double yPos = 0;
         for (MarkPin pin : markPinList) {
             if (xPos > MarkPin.PIN_SIZE * 2) {
-            xPos = 0;
-            yPos += MarkPin.PIN_SIZE * 2;
+                xPos = 0;
+                yPos += MarkPin.PIN_SIZE * 2;
             }
             markPins.add(pin.getPinGraphic(), xPos, yPos);
             xPos += MarkPin.PIN_SIZE * 2;

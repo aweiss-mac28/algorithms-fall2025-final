@@ -27,8 +27,8 @@ public class Main {
     private static void addButtons() {
         knuthButton = new Button("Run Knuth Algorithm");
         playButton = new Button("Play Mastermind");
-        knuthButton.setPosition(WINDOW_WIDTH/2 - knuthButton.getWidth()/2,WINDOW_HEIGHT/2 - knuthButton.getHeight()*1.2);
-        playButton.setPosition(WINDOW_WIDTH/2 - playButton.getWidth()/2, knuthButton.getY() + knuthButton.getHeight() + 10);
+        knuthButton.setPosition(WINDOW_WIDTH / 2 - knuthButton.getWidth() / 2,WINDOW_HEIGHT / 2 - knuthButton.getHeight() * 1.2);
+        playButton.setPosition(WINDOW_WIDTH / 2 - playButton.getWidth() / 2, knuthButton.getY() + knuthButton.getHeight() + 10);
         canvas.add(knuthButton);
         canvas.add(playButton);
         knuthButton.onClick(() -> runKnuth());

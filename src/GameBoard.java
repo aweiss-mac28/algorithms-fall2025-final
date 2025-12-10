@@ -20,7 +20,6 @@ public class GameBoard extends GraphicsGroup {
         Rectangle board = new Rectangle(0, 0, boardWidth, boardHeight);
         board.setFillColor(Color.LIGHT_GRAY);
         this.add(board);
-        
     }
 
     private void createGuessPinHoles() {
@@ -33,7 +32,7 @@ public class GameBoard extends GraphicsGroup {
                 Ellipse pinHole = new Ellipse(xPos, yPos, CodePin.PIN_SIZE, CodePin.PIN_SIZE);
                 pinHole.setFillColor(Color.GRAY);
                 guessPinHoles.add(pinHole);
-        }
+            }
         }
         guessPinHoles.setCenter(CodePin.PIN_SIZE * 3, boardHeight / 2);
         this.add(guessPinHoles);
