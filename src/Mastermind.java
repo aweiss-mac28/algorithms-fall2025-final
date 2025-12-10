@@ -47,10 +47,15 @@ public class Mastermind {
         marksList = new ArrayList<>();
         scan = new Scanner(System.in);
         visualize();
-        play();
+        //play();
     }
 
-    public void play() {
+    public void play(){
+        
+
+    }
+
+    public void play_Old() {
         System.out.println("~~~~~ NEW GAME STARTED ~~~~~");
         while (guessList.size() < MAX_GUESSES && !gameWon()) {
             System.out.println("Make a guess (or enter another command such as 'help'): ");
@@ -119,7 +124,6 @@ public class Mastermind {
         }
         System.out.println("Button guess: " + strButtonGuess + " , buttonCount: " + buttonCount);
         if(buttonCount == 4) {
-            //processUserInput(strButtonGuess);
             System.out.println("Button guess: " + strButtonGuess + " , buttonCount: " + buttonCount);
             Marks marks = processUserInput(strButtonGuess);
             marksList.add(marks);
