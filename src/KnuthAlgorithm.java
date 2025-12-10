@@ -48,9 +48,13 @@ public class KnuthAlgorithm {
         else{
             allCodes.remove(guess);
             possibleCodes.remove(guess);
+            ArrayList<String> newList = new ArrayList<>();
             for(String code : possibleCodes){
-                checkIfPossible(marks.getMarks(), guess, code);
+                if(checkIfPossible(marks.getMarks(), guess, code)){
+                    newList.add(code);
+                }
             }
+            possibleCodes = newList;
         }
     }
 
