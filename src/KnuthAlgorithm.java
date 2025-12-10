@@ -1,16 +1,26 @@
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import edu.macalester.graphics.CanvasWindow;
+
 public class KnuthAlgorithm {
     private static Scanner scan;
     private static ArrayList<Guess> guessList ;
+        private static ArrayList<Marks> marksList;
+
+        private static Visualizer visualizer;
+
     private static Answer answer;
     private static boolean gameWon;
-
     private static ArrayList <String> possibleCodes;
     private static ArrayList <String> allCodes;
+
+    private final static int WINDOW_WIDTH = 300;
+    private final static int WINDOW_HEIGHT = 600;
+    private static CanvasWindow canvas;
 
     public KnuthAlgorithm() {
         
@@ -21,23 +31,46 @@ public class KnuthAlgorithm {
         possibleCodes = generateCodes();
         allCodes = new ArrayList<>(possibleCodes);
         guessList = new ArrayList<>();
+        marksList = new ArrayList<>();
+
 
     }
 
     public void runGame(){
        
         processTurn("1122");
-
+        visualize();
         while(!gameWon){
             String nextGuess = chooseNextGuess();
             processTurn("" + nextGuess);
+              if (visualizer != null) {
+                visualizer.update(guessList, marksList);
+                canvas.pause(2000);
+                canvas.draw();
+            }
         }
+    }
+      public static void visualize() {
+        if (canvas != null) {
+            canvas.closeWindow();
+        }
+
+        canvas = new CanvasWindow("Mastermind Game", WINDOW_WIDTH, WINDOW_HEIGHT);
+        canvas.setBackground(Color.BLACK);
+
+        visualizer = new Visualizer(WINDOW_WIDTH, WINDOW_HEIGHT);
+        visualizer.update(guessList, marksList);
+        canvas.add(visualizer);
+
+
+        canvas.draw();
     }
 
     public static void processTurn(String guess){
         System.out.println("guess: " + guess);
         Marks marks = processUserInput(guess);
         System.out.println(marks.getMarks());
+        marksList.add(marks);
         String markResult = formatMarks(marks.getMarks());
         int numblack = Integer.parseInt(markResult.substring(1));
         if(numblack == 4){
