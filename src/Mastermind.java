@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import edu.macalester.graphics.CanvasWindow;
@@ -32,8 +33,9 @@ public class Mastermind {
     private static String strButtonGuess;
     
     public static void main(String[] args) {
-        new Mastermind();
+        Mastermind mm = new Mastermind();
         scan = new Scanner(System.in);
+        gameChoice(mm);
     }
 
     public Mastermind() {
@@ -77,6 +79,21 @@ public class Mastermind {
             reset();
         } else if (canvas != null) {
             canvas.closeWindow();
+        }
+    }
+
+    private static void gameChoice(Mastermind mm) {
+        System.out.println("How do you want to play?\nType 't' for text or 'v' for visual.");
+        String userInput = scan.nextLine();
+        List<String> tv = List.of("t","v");
+        while (!tv.contains(userInput)) {
+            System.out.println("That's not a valid input. Please enter 't' or 'v'.");
+            userInput = scan.nextLine();
+        }
+        if (userInput.equalsIgnoreCase("t")) {
+            mm.playText();
+        } else if (userInput.equalsIgnoreCase("v")) {
+            mm.playClick();
         }
     }
 
