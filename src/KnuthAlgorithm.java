@@ -43,12 +43,13 @@ public class KnuthAlgorithm {
         int numblack = Integer.parseInt(markResult.substring(1));
         if(numblack == 4){
             System.out.println("Game won with " + guessList.size() + "guesses!");
+            gameWon = true;
         }
         else{
             allCodes.remove(guess);
             possibleCodes.remove(guess);
             for(String code : possibleCodes){
-                checkIfPossible(marks.getMarks(), code);
+                checkIfPossible(marks.getMarks(), guess, code);
             }
         }
     }
@@ -79,8 +80,9 @@ public class KnuthAlgorithm {
 
     //if guesslist.get(guesslist.size()-1) produced a certain mark, decides whether a hypothetical 
     // future guess could have been the secret code to produce those marks.
-    public static boolean checkIfPossible(String marks, String possibleGuess){
-        Marks possibleGuessMarks = processHypotheticalInput(possibleGuess);
+    public static boolean checkIfPossible(String marks, String prevGuess, String possibleGuess){
+       // System.out.println("Processing hyp: " + prevGuess + "  " + possibleGuess);
+        Marks possibleGuessMarks = processHypotheticalInput(prevGuess, possibleGuess);
         String possibleResult = possibleGuessMarks.getMarks();
         if(marks.equals(possibleResult)){
            return true;
@@ -110,7 +112,8 @@ public class KnuthAlgorithm {
         return new Marks(guess, answer);
     }
 
-     public static Marks processHypotheticalInput(String userInput) {
+     public static Marks processHypotheticalInput(String userInput, String hypotheticalAnswer) {
+        Answer hypotheticalAns = new Answer(hypotheticalAnswer);
         ArrayList<String> userGuess = new ArrayList<>();
         for(int i = 0; i<= 3; i++){
             int inputNum = Integer.parseInt(userInput.substring(i,i+1));
@@ -122,7 +125,7 @@ public class KnuthAlgorithm {
         CodePin guessPin3 = new CodePin(userGuess.get(2));
         CodePin guessPin4 = new CodePin(userGuess.get(3));
         Guess guess = new Guess(guessPin1, guessPin2, guessPin3, guessPin4);
-        return new Marks(guess, answer);
+        return new Marks(guess, hypotheticalAns);
     }
 
     public static ArrayList<String> generateCodes(){
@@ -153,8 +156,8 @@ public class KnuthAlgorithm {
     // Map: markPattern → count
     HashMap<String, Integer> partition = new HashMap<>();
 
-        for (String secret : possible) {
-            Marks m = processUserInput(""+guess);
+        for (String possibleCode : possible) {
+            Marks m = processHypotheticalInput(guess, possibleCode);
             String key = formatMarks(m.getMarks());          
             partition.put(key, partition.getOrDefault(key, 0) + 1);
         }

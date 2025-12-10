@@ -22,6 +22,13 @@ public class Answer implements Sequence {
         }
     }
 
+    public Answer(String givenAnswer){
+         answer = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            answer.add(new CodePin(ColorFormat.numberToColor(Integer.parseInt(givenAnswer.substring(i, i+1)))));
+        }
+    }
+
     public ArrayList<CodePin> getSequence() {
         return answer;
     }
