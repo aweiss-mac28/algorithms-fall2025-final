@@ -5,12 +5,47 @@ import edu.macalester.graphics.GraphicsGroup;
 
 public class Guess implements Sequence {
     private ArrayList<CodePin> guess;
+
+    /***
+     * Constructor for a full (evaluatable) guess.
+     */
     public Guess(CodePin pin1, CodePin pin2, CodePin pin3, CodePin pin4) {
         guess = new ArrayList<>();
         guess.add(pin1);
         guess.add(pin2);
         guess.add(pin3);
         guess.add(pin4);
+    }
+
+    /***
+     * Constructor for an incomplete guess with 3 pins.
+     */
+    public Guess(CodePin pin1, CodePin pin2, CodePin pin3) {
+        guess = new ArrayList<>();
+        guess.add(pin1);
+        guess.add(pin2);
+        guess.add(pin3);
+    }
+
+    /***
+     * Constructor for an incomplete guess with 2 pins.
+     */
+    public Guess(CodePin pin1, CodePin pin2) {
+        guess = new ArrayList<>();
+        guess.add(pin1);
+        guess.add(pin2);
+    }
+
+    /***
+     * Constructor for an incomplete guess with 1 pin.
+     */
+    public Guess(CodePin pin1) {
+        guess = new ArrayList<>();
+        guess.add(pin1);
+    }
+
+    public int size() {
+        return guess.size();
     }
 
     public ArrayList<CodePin> getSequence() {
