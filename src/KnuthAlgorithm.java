@@ -19,6 +19,8 @@ public class KnuthAlgorithm {
     private static ArrayList <String> possibleCodes;
     private static ArrayList <String> allCodes;
     private static GraphicsGroup answerGraphic;
+    private int frameCount = 0;
+    private final int FRAMES_PER_STEP = 120;    
 
     public KnuthAlgorithm() {
         answer = new Answer();
@@ -33,17 +35,25 @@ public class KnuthAlgorithm {
     }
 
     public void runGame(){
-        processTurn("1122");
         visualize();
-        while (!gameWon) {
-            String nextGuess = chooseNextGuess();
-            processTurn("" + nextGuess);
-              if (visualizer != null) {
+      
+        canvas.animate(() -> {
+            if (!gameWon) {
+                frameCount++;
+
+                if (frameCount < FRAMES_PER_STEP) {
+                    return;   
+                }
+                frameCount = 0; 
+                if (guessList.isEmpty()) {
+                    processTurn("1122");
+                } else {
+                    String nextGuess = chooseNextGuess();
+                    processTurn(nextGuess);
+                }
                 visualizer.update(guessList, marksList);
-                canvas.pause(2000);
-                canvas.draw();
             }
-        }
+        });
     }
       public static void visualize() {
         if (canvas != null) {

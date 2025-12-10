@@ -11,6 +11,8 @@ public class Main {
     private static Button playButton;
 
     public static void main(String[] args) {
+        // runKnuth();
+        // playMastermind();
         startMenu();
     }
 
