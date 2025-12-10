@@ -1,11 +1,13 @@
 
 import java.awt.Color;
+import java.awt.TextArea;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.ui.Button;
+import edu.macalester.graphics.GraphicsText;
 
 public class Mastermind {
     private final static int WINDOW_WIDTH = 300;
@@ -47,12 +49,31 @@ public class Mastermind {
         marksList = new ArrayList<>();
         scan = new Scanner(System.in);
         visualize();
-        //play();
     }
 
-    public void play(){
-        
+    public static void winCheck() {
+        if (gameWon()) {
+            canvas.pause(4000);
+            totalWins ++;
+            System.out.println("You won!");
+            canvas.removeAll();
+            GraphicsText win = new GraphicsText("You win!");
+            win.setFillColor(Color.WHITE);
+            win.setCenter(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+            canvas.add(win);
+            canvas.draw();
+        }
 
+        if (!gameWon() && guessList.size() >= MAX_GUESSES) {
+            System.out.println("You lost :(");
+            totalLosses ++;
+            canvas.removeAll();
+            GraphicsText lose = new GraphicsText("You lose :(");
+            lose.setFillColor(Color.WHITE);
+            lose.setCenter(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+            canvas.add(lose);
+            canvas.draw();
+        }
     }
 
     public void play_Old() {
@@ -132,6 +153,7 @@ public class Mastermind {
             canvas.draw();
             buttonCount = 0;
             strButtonGuess = "";
+            winCheck();
         }
         
     }
@@ -176,7 +198,7 @@ public class Mastermind {
     }
 
     public static void reset() {
-        new Mastermind().play();
+        new Mastermind().play_Old();
     }
 
     public static void previousGuesses() {
@@ -203,7 +225,7 @@ public class Mastermind {
         canvas.draw();
     }
 
-    public boolean gameWon() {
+    public static boolean gameWon() {
         if (guessesMade == 0) {
             return false;
         }
