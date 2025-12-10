@@ -5,19 +5,19 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.GraphicsText;
 
 public class KnuthAlgorithm {
     private static Scanner scan;
     private static ArrayList<Guess> guessList ;
-        private static ArrayList<Marks> marksList;
-
-        private static Visualizer visualizer;
-
+    private static ArrayList<Marks> marksList;
+    private static Visualizer visualizer;
     private static Answer answer;
     private static boolean gameWon;
     private static ArrayList <String> possibleCodes;
     private static ArrayList <String> allCodes;
-
+    private static GraphicsGroup answerGraphic;
     private final static int WINDOW_WIDTH = 300;
     private final static int WINDOW_HEIGHT = 600;
     private static CanvasWindow canvas;
@@ -25,6 +25,7 @@ public class KnuthAlgorithm {
     public KnuthAlgorithm() {
         
         answer = new Answer();
+        answerGraphic = answer.getSequenceGraphics();
         System.out.println("secret: " + answer.getSequenceAsString() );
         gameWon = false;
 
@@ -57,7 +58,12 @@ public class KnuthAlgorithm {
 
         canvas = new CanvasWindow("Mastermind Game", WINDOW_WIDTH, WINDOW_HEIGHT);
         canvas.setBackground(Color.BLACK);
-
+        answerGraphic.setCenter(WINDOW_WIDTH/2-15, 60);
+        canvas.add(answerGraphic);
+        GraphicsText answerText = new GraphicsText("SECRET ANSWER");
+        answerText.setFillColor(Color.white);
+        answerText.setCenter(WINDOW_WIDTH/2-15, 40);
+        canvas.add(answerText);
         visualizer = new Visualizer(WINDOW_WIDTH, WINDOW_HEIGHT);
         visualizer.update(guessList, marksList);
         canvas.add(visualizer);
