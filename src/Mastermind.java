@@ -40,37 +40,15 @@ public class Mastermind {
         totalWins = 0;
         totalLosses = 0;
         guessesMade = 0;
-        buttonCount = 0;
-        strButtonGuess = "";
         answer = new Answer();
         guessList = new ArrayList<>();
         marksList = new ArrayList<>();
-        visualize();
     }
 
-    public static void winCheck() {
-        if (gameWon()) {
-            canvas.pause(4000);
-            totalWins ++;
-            System.out.println("You won!");
-            canvas.removeAll();
-            GraphicsText win = new GraphicsText("You win!");
-            win.setFillColor(Color.WHITE);
-            win.setCenter(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
-            canvas.add(win);
-            canvas.draw();
-        }
-
-        if (!gameWon() && guessList.size() >= MAX_GUESSES) {
-            System.out.println("You lost :(");
-            totalLosses ++;
-            canvas.removeAll();
-            GraphicsText lose = new GraphicsText("You lose :(");
-            lose.setFillColor(Color.WHITE);
-            lose.setCenter(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
-            canvas.add(lose);
-            canvas.draw();
-        }
+    public static void playClick() {
+        buttonCount = 0;
+        strButtonGuess = "";
+        visualize();
     }
 
     public void play_Old() {
@@ -99,6 +77,31 @@ public class Mastermind {
             reset();
         } else {
             canvas.closeWindow();
+        }
+    }
+
+    public static void winCheck() {
+        if (gameWon()) {
+            canvas.pause(4000);
+            totalWins ++;
+            System.out.println("You won!");
+            canvas.removeAll();
+            GraphicsText win = new GraphicsText("You win!");
+            win.setFillColor(Color.WHITE);
+            win.setCenter(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+            canvas.add(win);
+            canvas.draw();
+        }
+
+        if (!gameWon() && guessList.size() >= MAX_GUESSES) {
+            System.out.println("You lost :(");
+            totalLosses ++;
+            canvas.removeAll();
+            GraphicsText lose = new GraphicsText("You lose :(");
+            lose.setFillColor(Color.WHITE);
+            lose.setCenter(WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+            canvas.add(lose);
+            canvas.draw();
         }
     }
 
