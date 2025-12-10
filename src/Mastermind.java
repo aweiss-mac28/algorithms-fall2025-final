@@ -1,6 +1,4 @@
-
 import java.awt.Color;
-import java.awt.TextArea;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;

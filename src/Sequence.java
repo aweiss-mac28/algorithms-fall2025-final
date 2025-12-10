@@ -7,6 +7,4 @@ public interface Sequence {
     public ArrayList<CodePin> getSequence();
     public String getSequenceAsString();
     public GraphicsGroup getSequenceGraphics();
-
-    //is this needed?
 }

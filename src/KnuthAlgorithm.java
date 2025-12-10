@@ -1,15 +1,12 @@
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 
 public class KnuthAlgorithm {
-    private static Scanner scan;
     private static ArrayList<Guess> guessList ;
     private static ArrayList<Marks> marksList;
     private static Visualizer visualizer;
