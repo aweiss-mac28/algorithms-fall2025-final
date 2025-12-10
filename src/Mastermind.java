@@ -42,7 +42,6 @@ public class Mastermind {
         buttonCount = 0;
         strButtonGuess = "";
         answer = new Answer();
-        System.out.println(answer.getSequenceAsString());
         guessList = new ArrayList<>();
         marksList = new ArrayList<>();
         scan = new Scanner(System.in);
