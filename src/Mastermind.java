@@ -45,7 +45,7 @@ public class Mastermind {
         marksList = new ArrayList<>();
     }
 
-    public static void playClick() {
+    public void playClick() {
         buttonCount = 0;
         strButtonGuess = "";
         visualize();
