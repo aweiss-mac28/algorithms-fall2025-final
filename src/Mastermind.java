@@ -51,7 +51,7 @@ public class Mastermind {
         visualize();
     }
 
-    public void play_Old() {
+    public void playText() {
         System.out.println("~~~~~ NEW GAME STARTED ~~~~~");
         while (guessList.size() < MAX_GUESSES && !gameWon()) {
             System.out.println("Make a guess (or enter another command such as 'help'): ");
@@ -191,7 +191,7 @@ public class Mastermind {
     }
 
     public static void reset() {
-        new Mastermind().play_Old();
+        new Mastermind().playText();
     }
 
     public static void previousGuesses() {
