@@ -43,6 +43,6 @@ public class Main {
     }
 
     private static void playMastermind() {
-        Mastermind.main(null);
+        new Mastermind();
     }
 }
