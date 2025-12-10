@@ -150,6 +150,9 @@ public class Mastermind {
             buttonCount = 0;
             strButtonGuess = "";
             winCheck();
+        } else {
+            createGuess(strButtonGuess);
+            visualizer.update(guessList, marksList);
         }
     }
 
@@ -177,14 +180,8 @@ public class Mastermind {
         if (userInput.equalsIgnoreCase("reset")) {
             reset();
         }
-        ArrayList<String> userGuess = new ArrayList<>(Arrays.asList(userInput.split(" ")));
-        CodePin guessPin1 = new CodePin(userGuess.get(0));
-        CodePin guessPin2 = new CodePin(userGuess.get(1));
-        CodePin guessPin3 = new CodePin(userGuess.get(2));
-        CodePin guessPin4 = new CodePin(userGuess.get(3));
-        Guess guess = new Guess(guessPin1, guessPin2, guessPin3, guessPin4);
-        guessList.add(guess);
-        guessesMade ++;
+        Guess guess = createGuess(userInput);
+        guessesMade++;
         return new Marks(guess, answer);
     }
 
@@ -228,5 +225,42 @@ public class Mastermind {
             return true;
         }
         return false;
+    }
+
+    private static Guess createGuess(String guessString) {
+        ArrayList<String> userGuess = new ArrayList<>(Arrays.asList(guessString.split(" ")));
+        int numPins = userGuess.size();
+        Guess guess = null;
+        if (numPins == 1) {
+            guess = new Guess(new CodePin(userGuess.get(0)));
+        } else if (numPins == 2) {
+            guess = new Guess(
+                new CodePin(userGuess.get(0)), 
+                new CodePin(userGuess.get(1)));
+        } else if (numPins == 3) {
+            guess = new Guess(
+                new CodePin(userGuess.get(0)), 
+                new CodePin(userGuess.get(1)), 
+                new CodePin(userGuess.get(2)));
+        } else {
+            // Case when you have a complete guess.
+            guess = new Guess(
+                new CodePin(userGuess.get(0)), 
+                new CodePin(userGuess.get(1)), 
+                new CodePin(userGuess.get(2)), 
+                new CodePin(userGuess.get(3)));
+        }
+        updateGuessList(guess);
+        return guess;
+    }
+
+    private static void updateGuessList(Guess guess) {
+        if (guessList.isEmpty()) {
+            guessList.add(guess);
+        } else if (guess.size() > guessList.getLast().size()) {
+            guessList.set(guessesMade, guess);
+        } else {
+            guessList.add(guess);
+        }
     }
 }
