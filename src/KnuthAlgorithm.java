@@ -6,6 +6,12 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 
+/**
+ * Holds all game variables and methods for executing Donald Knuth's algorithm.
+ * Not interactive- Displays the steps being played based on the algorithm's determination. 
+ * @authors~~~
+ * 
+ */
 public class KnuthAlgorithm {
     private final static int WINDOW_WIDTH = 300;
     private final static int WINDOW_HEIGHT = 600;
@@ -22,6 +28,10 @@ public class KnuthAlgorithm {
     private int frameCount = 0;
     private final int FRAMES_PER_STEP = 120;    
 
+    /**
+     * Constructs new KnuthAlgorithn object, initializes random answer, 
+     * and initializes the possible codes and all codes lists.
+     */
     public KnuthAlgorithm() {
         answer = new Answer();
         answerGraphic = answer.getSequenceGraphics();
@@ -34,6 +44,10 @@ public class KnuthAlgorithm {
         marksList = new ArrayList<>();
     }
 
+    /**
+     * Runs the game by staggering the steps made, always starting with the guess "red, red, orange, orange"
+     * Calls chooseNextGuess and processes the results repeatedly until the game is won. 
+     */
     public void runGame(){
         visualize();
       
@@ -55,7 +69,11 @@ public class KnuthAlgorithm {
             }
         });
     }
-      public static void visualize() {
+
+    /**
+     * Creates canvas window, adds the answer graphic to the screen and creates a Visualizer object. 
+     */
+    public static void visualize() {
         if (canvas != null) {
             canvas.closeWindow();
         }
@@ -78,6 +96,10 @@ public class KnuthAlgorithm {
         canvas.draw();
     }
 
+    /**
+     * Takes the user's guess and gets the resulting marks. If all 4 are black, the game is won. 
+     * Otherwise, the code is removed from both lists, and any now impossible codes are removed from possibleCodes. 
+     */
     public static void processTurn(String guess){
         System.out.println("guess: " + guess);
         Marks marks = processUserInput(guess);
@@ -86,14 +108,19 @@ public class KnuthAlgorithm {
         String markResult = formatMarks(marks.getMarks());
         int numblack = Integer.parseInt(markResult.substring(1));
         if (numblack == 4){
+            GraphicsText winningText = new GraphicsText("Game won in "+ guessList.size() + " guesses!");
+            winningText.setFillColor(Color.white);
+            winningText.setFontSize(25);
+            winningText.setCenter(WINDOW_WIDTH / 2, 550);
+            canvas.add(winningText);
             System.out.println("Game won with " + guessList.size() + " guesses!");
             gameWon = true;
         } else {
             allCodes.remove(guess);
             possibleCodes.remove(guess);
             ArrayList<String> newList = new ArrayList<>();
-            for(String code : possibleCodes){
-                if(checkIfPossible(marks.getMarks(), guess, code)){
+            for (String code : possibleCodes) {
+                if (checkIfPossible(marks, guess, code)) {
                     newList.add(code);
                 }
             }
@@ -101,6 +128,11 @@ public class KnuthAlgorithm {
         }
     }
 
+    /**
+     * Creates a list of the best candidares by finding the maximum amount of remaining guesses after guessing each code. If there are ties, 
+     * bestCandidates has multiple codes. Then, it finds the first code in best candidates which is still possible, and returns it as the 
+     * next guess. If none of bestCandidates are still possible, the first item in it is returned. 
+     */
     public static String chooseNextGuess() {
         int bestScore = Integer.MAX_VALUE;
         ArrayList<String> bestCandidates = new ArrayList<>();
@@ -125,15 +157,15 @@ public class KnuthAlgorithm {
         return bestCandidates.get(0);
     }
 
-    //if guesslist.get(guesslist.size()-1) produced a certain mark, decides whether a hypothetical 
-    // future guess could have been the secret code to produce those marks.
-    public static boolean checkIfPossible(String marks, String prevGuess, String possibleGuess) {
-        Marks possibleGuessMarks = processHypotheticalInput(prevGuess, possibleGuess);
-        String possibleResult = possibleGuessMarks.getMarks();
-        if (marks.equals(possibleResult)) {
-           return true;
-        }
-        return false;
+    /**
+     * Decides if based on the marks given for the given previous guess, it is possible that the possibleGuess posed could be the game answer which produced those marks.
+     * @param actual - the actual marks which resulted
+     * @param prevGuess - the guess which caused those marks
+     * @param possibleGuess - the code being posed as a potential solution
+     */
+    public static boolean checkIfPossible(Marks actual, String prevGuess, String possibleGuess) {
+    Marks hypothetical = processHypotheticalInput(prevGuess, possibleGuess);
+        return actual.getNumBlack() == hypothetical.getNumBlack() && actual.getNumWhite() == hypothetical.getNumWhite();
     }
 
     public static String formatMarks(String phrase) {
@@ -142,6 +174,11 @@ public class KnuthAlgorithm {
         return numwhite + "" + numblack;
     }
 
+    /**
+     * Gives the marks correlating witbh the amount of codePins in the right location, and the amount
+     * in the wrong location but the correct color. (This is the "codemaker's" perspective, and therefore
+     * can only legally be called when a guess is actually made)
+     */
     public static Marks processUserInput(String userInput) {
         ArrayList<String> userGuess = new ArrayList<>();
         for (int i = 0; i<= 3; i++) {
@@ -158,7 +195,13 @@ public class KnuthAlgorithm {
         return new Marks(guess, answer);
     }
 
-     public static Marks processHypotheticalInput(String userInput, String hypotheticalAnswer) {
+     /**
+     * Given a hypothetical situation where hypotheticalAnswer is the game answer, gives the marks correlating witbh the amount of codePins in userInput 
+     * in the right location, and the amount in the wrong location but the correct color. 
+     * (This is the "guesser's perspective"-- they are not comparing to the actual answer, because they don't know it, but to a possible next guess they are considering 
+     * whether it could or could not be the answer)
+     */
+    public static Marks processHypotheticalInput(String userInput, String hypotheticalAnswer) {
         Answer hypotheticalAns = new Answer(hypotheticalAnswer);
         ArrayList<String> userGuess = new ArrayList<>();
         for (int i = 0; i<= 3; i++) {
@@ -198,12 +241,19 @@ public class KnuthAlgorithm {
         );
     }
 
+    /**
+     * For a guess, and for every remaining possible guess in the list, adds to a map which has a key with the num black pins 
+     * and num white pins and the amount of possible guesses that resulted in that key. Then, returns the maximum value as maxGroup. 
+     * Thus, finding for given guess, what the maximum amount of remaining codes will be after guessking. 
+     * (For every potential marks guess could return, which marks leave the greatest amount of codes in possible? These marks are worst case,
+     * so return the amount of potential guesses which would produce them--the worst case remaining guesses for given guess).
+     */
     public static int scoreGuess(String guess, ArrayList<String> possible) {
         HashMap<String, Integer> partition = new HashMap<>();
 
         for (String possibleCode : possible) {
             Marks m = processHypotheticalInput(guess, possibleCode);
-            String key = formatMarks(m.getMarks());          
+            String key = m.getNumBlack() + "," + m.getNumWhite();         
             partition.put(key, partition.getOrDefault(key, 0) + 1);
         }
 

@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 import edu.macalester.graphics.Ellipse;
 
+/**
+ * CodePin stores a pin GraphicsObject, the color as a pin, and the method to generate a random pin
+ * @authors ~~~
+ * 
+ */
 public class CodePin implements Pin {
     public static final double PIN_SIZE = 20;
     public static final List<String> colorList = List.of("Red", "Orange", "Yellow", "Green", "Blue", "Purple");

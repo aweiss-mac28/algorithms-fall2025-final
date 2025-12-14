@@ -3,6 +3,11 @@ import java.util.ArrayList;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
 
+/**
+ * Implements Sequence, stores both complete and incomplete guesses
+ * @authors~~~
+ * 
+ */
 public class Guess implements Sequence {
     private ArrayList<CodePin> guess;
 

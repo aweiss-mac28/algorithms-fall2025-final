@@ -1,6 +1,11 @@
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Provides interactive, console-based help documentation for the game (only available in console version).
+ * @authors~~~
+ * 
+ */
 public class Help {
     private static Scanner helpScanner;
     private static List<String> yeses = List.of("y", "Y", "yes", "Yes");

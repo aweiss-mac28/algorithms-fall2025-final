@@ -1,11 +1,19 @@
 import java.util.ArrayList;
-
 import edu.macalester.graphics.GraphicsGroup;
 
+/**
+ * Answer stores an array of codepins representing the answer to a roujnd of the game, as well as the associated GraphicsGroup.
+ * It is capable of randomly generating an answer sequence. 
+ * @authors ~~~
+ * 
+ */
 public class Answer implements Sequence {
     private ArrayList<CodePin> answer;
     private GraphicsGroup answerPins;
 
+     /**
+     * Constructor for a randomly generated answer code. 
+     */
     public Answer() {
         answer = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -21,6 +29,9 @@ public class Answer implements Sequence {
         }
     }
 
+    /**
+     * Constructor for a pre-selected answer code. 
+     */
     public Answer(String givenAnswer){
         answer = new ArrayList<>();
         for (int i = 0; i < 4; i++) {

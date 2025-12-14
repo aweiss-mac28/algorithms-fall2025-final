@@ -64,6 +64,14 @@ public class Marks {
         return ("Your guess got " + numBlack + " black marks and " + numWhite + " white marks.");
     }
 
+    public int getNumBlack(){
+        return numBlack;
+    }
+
+    public int getNumWhite(){
+        return numWhite;
+    }
+
     public GraphicsGroup getMarksGraphics() {
         return markPins;
     }

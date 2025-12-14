@@ -1,4 +1,11 @@
+/**
+ * Holds two conversion methods-- one which formats a color string to the proper format 
+ * and one which translates a color int to a color string. 
+ * @authors~~~
+ * 
+ */
 public class ColorFormat {
+
     public static String toColorFormat(String color) {
         String colorFormatString = "";
         color = color.toLowerCase();
