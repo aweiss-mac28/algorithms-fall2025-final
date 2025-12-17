@@ -8,6 +8,12 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.GraphicsText;
 
+/**
+ * Handles running Mastermind game (user input version). Adds all graphics 
+ * objects to canvas, handles button presses, runs win/lose logic, and keeps 
+ * track of long term wins and losses. 
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
+ */
 public class Mastermind {
     private final static int WINDOW_WIDTH = 300;
     private final static int WINDOW_HEIGHT = 600;
@@ -53,6 +59,9 @@ public class Mastermind {
         visualize();
     }
 
+    /**
+     * Console version of the game. Uses a scanner to read user guesses and prints out statements informing user of results. 
+     */
     public void playText() {
         System.out.println("~~~~~ NEW GAME STARTED ~~~~~");
         while (guessList.size() < MAX_GUESSES && !gameWon()) {
@@ -82,6 +91,9 @@ public class Mastermind {
         }
     }
 
+    /**
+     * Takes user input and either calls the text version or button version of the game depending on input. 
+     */
     private static void gameChoice(Mastermind mm) {
         System.out.println("How do you want to play?\nType 't' for text or 'v' for visual.");
         String userInput = scan.nextLine();
@@ -97,6 +109,10 @@ public class Mastermind {
         }
     }
 
+    /**
+     * Checks if the user has won the game, or if they have exceded the maximum amount of guesses 
+     * and lost. Updates canvas accordingly, but does nothing if neither cases are true. 
+     */
     public static void winCheck() {
         if (gameWon()) {
             canvas.pause(4000);
@@ -152,6 +168,10 @@ public class Mastermind {
         purpleButton.onClick(() -> handleButtonPress("purple"));
     }
 
+    /**
+     * Adds latest button press's color to strButtonGuess, and if the user has pressed 
+     * 4 buttons since the last guess, marks their guess and updates game varibales accordingly.
+     */
     public static void handleButtonPress(String color) {
         buttonCount++;
         if (strButtonGuess.equals("")) {
@@ -175,6 +195,9 @@ public class Mastermind {
         }
     }
 
+    /**
+     * Processes console based user inputs, including new guesses. Marks guesses and returns results. 
+     */
     public static Marks processUserInput(String userInput) {
         while (userInput.equalsIgnoreCase("help")) {
             Help.getHelp();
@@ -219,6 +242,9 @@ public class Mastermind {
         }
     }
 
+    /**
+     * Creates new CanvasWindow and sets up board after closing previous canvas. Updates board with past guesses and marks. 
+     */
     public static void visualize() {
         if (canvas != null) {
             canvas.closeWindow();
@@ -246,6 +272,10 @@ public class Mastermind {
         return false;
     }
 
+    /**
+     * Makes a new guess using a string of colors, eg: "red red blue". Makes CodePin for every 
+     * color in list and creates guess object with it. 
+     */
     private static Guess createGuess(String guessString) {
         ArrayList<String> userGuess = new ArrayList<>(Arrays.asList(guessString.split(" ")));
         int numPins = userGuess.size();

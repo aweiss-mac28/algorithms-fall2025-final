@@ -5,8 +5,7 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Rectangle;
 /**
  * Creates a board graphic and has methods for filling in pins
- * @authors~~~
- * 
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
  */
 public class GameBoard extends GraphicsGroup {
     private double boardHeight;

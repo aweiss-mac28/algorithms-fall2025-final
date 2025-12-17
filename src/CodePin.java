@@ -7,8 +7,7 @@ import edu.macalester.graphics.Ellipse;
 
 /**
  * CodePin stores a pin GraphicsObject, the color as a pin, and the method to generate a random pin
- * @authors ~~~
- * 
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
  */
 public class CodePin implements Pin {
     public static final double PIN_SIZE = 20;

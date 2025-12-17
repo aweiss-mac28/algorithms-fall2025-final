@@ -2,6 +2,11 @@ import java.util.ArrayList;
 
 import edu.macalester.graphics.GraphicsGroup;
 
+/**
+ * Inherits macalester graphics GraphicsGroup. Creates Gameboard object and keeps track of guessPins 
+ * and marksPins graphics groups by adding them to itself.
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
+ */
 public class Visualizer extends GraphicsGroup {
     private GraphicsGroup guessPins = new GraphicsGroup();
     private GraphicsGroup marksPins = new GraphicsGroup();

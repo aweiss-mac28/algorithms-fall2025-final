@@ -6,8 +6,7 @@ import edu.macalester.graphics.ui.Button;;
 /**
  * Has main method which runs program. Has startMenu method, which
  * allows user to choose between playing mastermind and observing the Knuth Algorithm
- * @authors~~~
- * 
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
  */
 public class Main {
     private final static int WINDOW_WIDTH = 300;

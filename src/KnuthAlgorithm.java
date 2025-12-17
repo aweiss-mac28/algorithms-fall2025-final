@@ -9,8 +9,7 @@ import edu.macalester.graphics.GraphicsText;
 /**
  * Holds all game variables and methods for executing Donald Knuth's algorithm.
  * Not interactive- Displays the steps being played based on the algorithm's determination. 
- * @authors~~~
- * 
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
  */
 public class KnuthAlgorithm {
     private final static int WINDOW_WIDTH = 300;

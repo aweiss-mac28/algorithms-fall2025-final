@@ -4,8 +4,7 @@ import edu.macalester.graphics.GraphicsGroup;
 /**
  * Answer stores an array of codepins representing the answer to a roujnd of the game, as well as the associated GraphicsGroup.
  * It is capable of randomly generating an answer sequence. 
- * @authors ~~~
- * 
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
  */
 public class Answer implements Sequence {
     private ArrayList<CodePin> answer;

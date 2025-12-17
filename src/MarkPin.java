@@ -3,6 +3,11 @@ import java.util.List;
 
 import edu.macalester.graphics.Ellipse;
 
+/**
+ * Constructs the graphics object which represents a black or white pin on the board. (implements Pin, and
+ * varies from code pin in allowed colors and size)
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
+ */
 public class MarkPin implements Pin {
     public static final double PIN_SIZE = 5;
     List<String> markPinColors = List.of("black", "white");

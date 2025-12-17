@@ -1,8 +1,7 @@
 /**
  * Holds two conversion methods-- one which formats a color string to the proper format 
  * and one which translates a color int to a color string. 
- * @authors~~~
- * 
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
  */
 public class ColorFormat {
 

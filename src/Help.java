@@ -3,8 +3,7 @@ import java.util.Scanner;
 
 /**
  * Provides interactive, console-based help documentation for the game (only available in console version).
- * @authors~~~
- * 
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
  */
 public class Help {
     private static Scanner helpScanner;

@@ -5,8 +5,7 @@ import edu.macalester.graphics.GraphicsGroup;
 
 /**
  * Implements Sequence, stores both complete and incomplete guesses
- * @authors~~~
- * 
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
  */
 public class Guess implements Sequence {
     private ArrayList<CodePin> guess;

@@ -2,6 +2,11 @@ import java.util.ArrayList;
 
 import edu.macalester.graphics.GraphicsGroup;
 
+/**
+ * Takes guess and answer sequences as parameters, and stores the number of white and black pins this guess returns
+ * Also creates graphics group for the pins graphics representation. 
+ * @authors: Nora Betry, Courtney Brown, Elyse Quigley, and Avi Weiss
+ */
 public class Marks {
     private int numBlack;
     private int numWhite;
@@ -60,6 +65,9 @@ public class Marks {
         }
     }
 
+    /**
+     * Formats String designed to be printed in console version. 
+     */
     public String getMarks() {
         return ("Your guess got " + numBlack + " black marks and " + numWhite + " white marks.");
     }
